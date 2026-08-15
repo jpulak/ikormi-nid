@@ -1,0 +1,30 @@
+{
+  "name": "ikormi-nid",
+  "version": "1.0.0",
+  "description": "Staff-only Bangladesh NID scanner for Ikormi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpulak/ikormi-nid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpulak/ikormi-nid/issues"
+  },
+  "homepage": "https://github.com/jpulak/ikormi-nid#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

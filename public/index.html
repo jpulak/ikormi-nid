@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ikormi NID Scanner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main class="container">
+      <p class="eyebrow">IKORMI · STAFF TOOL</p>
+      <h1>NID Scanner</h1>
+      <p class="intro">
+        Upload a Bangladesh National ID card. Check every extracted value before
+        saving it to the organisation’s private sheet.
+      </p>
+
+      <section class="card">
+        <h2>1. Upload NID image</h2>
+
+        <form id="scan-form">
+          <label class="upload-label" for="nid-image">
+            <span>Choose a card image</span>
+            <small>JPG, PNG, or WEBP · maximum 10 MB</small>
+          </label>
+
+          <input
+            id="nid-image"
+            name="nidImage"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            required
+          />
+
+          <img id="image-preview" alt="Selected NID preview" hidden />
+
+          <button id="scan-button" type="submit">Scan card</button>
+        </form>
+
+        <p id="status" class="status" aria-live="polite">
+          Choose an image to begin.
+        </p>
+      </section>
+
+      <section id="review-card" class="card" hidden>
+        <h2>2. Review extracted information</h2>
+        <p class="notice">
+          OCR can make mistakes. Confirm the card visually before saving.
+        </p>
+
+        <div class="field">
+          <label for="name">English name</label>
+          <input id="name" type="text" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="nid-number">NID number</label>
+          <input id="nid-number" type="text" inputmode="numeric" autocomplete="off" />
+        </div>
+
+        <button id="save-button" type="button" disabled>
+          Save to Google Sheet
+        </button>
+
+        <p class="status">
+          Google Sheets saving will be enabled after OCR is connected.
+        </p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
