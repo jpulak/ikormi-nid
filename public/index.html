@@ -11,64 +11,108 @@
     <main class="container">
       <p class="eyebrow">IKORMI · STAFF TOOL</p>
       <h1>NID Scanner</h1>
+
       <p class="intro">
-        Upload a Bangladesh National ID card. Check every extracted value before
-        saving it to the organisation’s private sheet.
+        Upload front and back NID images. Select a field color and drag a box
+        over the exact text to read. Both full images are saved to Drive.
       </p>
 
       <section class="card">
-        <h2>1. Upload NID image</h2>
-
-        <form id="scan-form">
-          <label class="upload-label" for="nid-image">
-            <span>Choose a card image</span>
-            <small>JPG, PNG, or WEBP · maximum 10 MB</small>
-          </label>
-
-          <input
-            id="nid-image"
-            name="nidImage"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          />
-
-          <img id="image-preview" alt="Selected NID preview" hidden />
-
-          <button id="scan-button" type="submit">Scan card</button>
-        </form>
-
-        <p id="status" class="status" aria-live="polite">
-          Choose an image to begin.
-        </p>
+        <h2>1. Connect Google</h2>
+        <button id="connect-google-button" type="button">
+          Connect staff Google account
+        </button>
+        <p id="google-status" class="status">Google account not connected.</p>
       </section>
 
-      <section id="review-card" class="card" hidden>
-        <h2>2. Review extracted information</h2>
-        <p class="notice">
-          OCR can make mistakes. Confirm the card visually before saving.
+      <section class="card">
+        <h2>2. Upload both sides</h2>
+
+        <div class="uploads">
+          <label class="upload-label">
+            <span>Front of NID card</span>
+            <input
+              id="front-image"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            />
+          </label>
+
+          <label class="upload-label">
+            <span>Back of NID card</span>
+            <input
+              id="back-image"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            />
+          </label>
+        </div>
+      </section>
+
+      <section id="scanner" class="card" hidden>
+        <h2>3. Highlight the three fields</h2>
+
+        <div class="field-buttons">
+          <button type="button" data-field="englishName">English name</button>
+          <button type="button" data-field="nidNumber">NID number</button>
+          <button type="button" data-field="address">Bangla address</button>
+        </div>
+
+        <p class="hint">
+          Choose a color, then click and drag over that exact text. You can
+          draw fields on either card, but name and NID are usually best from
+          the three machine-readable lines on the back.
         </p>
 
-        <div class="field">
-          <label for="name">English name</label>
-          <input id="name" type="text" autocomplete="off" />
+        <div class="card-grid">
+          <section class="card-side">
+            <h3>Front side</h3>
+            <div class="image-stage">
+              <div class="image-frame">
+                <img id="front-preview" alt="Front NID card" hidden />
+                <div id="front-selection-layer" class="selection-layer"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card-side">
+            <h3>Back side</h3>
+            <div class="image-stage">
+              <div class="image-frame">
+                <img id="back-preview" alt="Back NID card" hidden />
+                <div id="back-selection-layer" class="selection-layer"></div>
+              </div>
+            </div>
+          </section>
         </div>
 
-        <div class="field">
-          <label for="nid-number">NID number</label>
-          <input id="nid-number" type="text" inputmode="numeric" autocomplete="off" />
+        <div class="actions">
+          <button id="scan-button" type="button">
+            Scan highlighted fields and save
+          </button>
         </div>
 
-        <button id="save-button" type="button" disabled>
-          Save to Google Sheet
-        </button>
+        <p id="status" class="status" aria-live="polite"></p>
+      </section>
 
-        <p class="status">
-          Google Sheets saving will be enabled after OCR is connected.
+      <section id="results" class="card" hidden>
+        <h2>4. Extracted information</h2>
+        <p><strong>Name:</strong> <span id="result-name"></span></p>
+        <p><strong>NID:</strong> <span id="result-nid"></span></p>
+        <p><strong>Bangla address:</strong> <span id="result-address"></span></p>
+        <p>
+          <strong>English address:</strong>
+          <span id="result-english-address"></span>
         </p>
       </section>
     </main>
 
-    <script src="app.js"></script>
+    <script
+      src="https://accounts.google.com/gsi/client"
+      async
+      defer
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js?v=9"></script>
   </body>
 </html>

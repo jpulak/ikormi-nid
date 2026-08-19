@@ -1,44 +1,73 @@
-form {
+:root {
+  font-family: Arial, sans-serif;
+  color: #172033;
+  background: #f4f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  width: min(960px, calc(100% - 32px));
+  margin: 56px auto;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #176b50;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+}
+
+.intro,
+.hint,
+.status {
+  color: #526078;
+  line-height: 1.55;
+}
+
+.card {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid #dce4f0;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(22, 34, 57, 0.06);
+}
+
+.uploads,
+.card-grid {
   display: grid;
   gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .upload-label {
   display: grid;
-  gap: 4px;
-  padding: 20px;
+  gap: 8px;
+  padding: 18px;
   border: 2px dashed #b7c7db;
   border-radius: 12px;
   background: #f8fbff;
-  cursor: pointer;
-}
-
-.upload-label span {
   font-weight: 700;
-}
-
-.upload-label small,
-.notice {
-  color: #526078;
-  line-height: 1.5;
-}
-
-input[type="file"] {
-  width: 100%;
-}
-
-#image-preview {
-  width: 100%;
-  max-height: 360px;
-  object-fit: contain;
-  border-radius: 10px;
-  background: #eef3f8;
+  cursor: pointer;
 }
 
 button {
   border: 0;
   border-radius: 10px;
-  padding: 13px 18px;
+  padding: 12px 16px;
   color: white;
   background: #176b50;
   font: inherit;
@@ -46,34 +75,89 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #11523d;
-}
-
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.status {
-  color: #526078;
-  line-height: 1.5;
+.field-buttons,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
 }
 
-.field {
-  display: grid;
-  gap: 7px;
-  margin: 18px 0;
+.field-buttons button[data-field="englishName"] {
+  background: #15803d;
 }
 
-.field label {
-  font-weight: 700;
+.field-buttons button[data-field="nidNumber"] {
+  background: #ea580c;
 }
 
-.field input {
-  width: 100%;
+.field-buttons button[data-field="address"] {
+  background: #7e22ce;
+}
+
+.field-buttons button.active {
+  outline: 4px solid #172033;
+  outline-offset: 2px;
+}
+
+.image-stage {
+  min-height: 220px;
+  max-height: 420px;
+  overflow: auto;
   padding: 12px;
-  border: 1px solid #bdc9d8;
+  border-radius: 12px;
+  background: #eef3f8;
+}
+
+.image-frame {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.image-frame img {
+  display: block;
+  max-width: 100%;
+  max-height: 380px;
   border-radius: 8px;
-  font: inherit;
+}
+
+.selection-layer {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.selection-box {
+  position: absolute;
+  border: 3px solid;
+  pointer-events: none;
+}
+
+.selection-englishName {
+  border-color: #15803d;
+  background: rgba(21, 128, 61, 0.18);
+}
+
+.selection-nidNumber {
+  border-color: #ea580c;
+  background: rgba(234, 88, 12, 0.18);
+}
+
+.selection-address {
+  border-color: #7e22ce;
+  background: rgba(126, 34, 206, 0.18);
+}
+
+@media (max-width: 700px) {
+  .uploads,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
 }
